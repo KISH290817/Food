@@ -24,8 +24,7 @@ const job = schedule.scheduleJob("00 11 * * *", async function () {
   console.log(new Date(), "The answer to life, the universe, and everything!");
   if (
     moment(date).add(1, "d").weekday() != 0 &&
-    moment(date).add(1, "d").weekday() != 6 &&
-    moment(date).add(1, "d").weekday() != 7
+    moment(date).add(1, "d").weekday() != 6
   ) {
     try {
       const kishDates = await instance.post("/updateDates", {
@@ -144,12 +143,13 @@ const job = schedule.scheduleJob("00 11 * * *", async function () {
       // res.writeHead(500);
       // res.json();
     }
+  } else {
+    logger.log({
+      date: new Date(),
+      error: "Week End",
+      data: "Something went wrong!",
+    });
   }
-  logger.log({
-    date: new Date(),
-    error: "Week End",
-    data: "Something went wrong!",
-  });
 });
 // http
 //   .createServer(async (req, res) => {
