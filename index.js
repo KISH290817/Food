@@ -17,10 +17,10 @@ log4js.configure({
   categories: { default: { appenders: ["cheese"], level: "info" } },
 });
 var logger = log4js.getLogger("reservation");
-
+console.log(new Date());
 const date = new Date();
 const schedule = require("node-schedule");
-const job = schedule.scheduleJob("00 11 * * *", async function () {
+const job = schedule.scheduleJob("00 00 11 * * *", async function () {
   console.log(new Date(), "The answer to life, the universe, and everything!");
   if (
     moment(date).add(1, "d").weekday() != 0 &&
